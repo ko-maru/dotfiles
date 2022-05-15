@@ -1,0 +1,54 @@
+# colors and decorations
+bold="$(tput bold)" 
+reset="$(tput sgr0)" 
+black="$(tput setaf 0)" 
+red="$(tput setaf 1)" 
+green="$(tput setaf 2)" 
+yellow="$(tput setaf 3)" 
+blue="$(tput setaf 4)" 
+magenta="$(tput setaf 5)" 
+cyan="$(tput setaf 6)" 
+white="$(tput setaf 7)" 
+grey="$(tput setaf 8)" 
+
+__ps1_status() {
+  local pipe_status=$1
+  
+  # [[ "${pipe_status}" =~ ^0( 0)*$ ]] && return 0
+
+  for status in ${pipe_status}; do
+    if [ "${status}" == "0" ]; then 
+      printf "${green}" 
+    else 
+      printf "${red}"
+    fi  
+    printf "${status} ${reset}"
+  done
+  printf "\b"
+}
+
+__ps1() {
+  local pipe_status="${PIPESTATUS[@]}"
+
+  local time="${grey}$(date +%H:%M:%S)${reset}" 
+  local user="\u" 
+  local hostname="\h" 
+  local git_branch="$(__git_ps1 "(%s)")"
+  local working_directory="${cyan}\w${reset}$([ -n "${git_branch}" ] && echo -en " ${git_branch}")"
+  local job="\j" 
+  local last_status="$(__ps1_status "${pipe_status}")" 
+  local prompt="\$"
+
+  local line1="[${job}] ${time} [ ${user}@${hostname}:${working_directory} ] [${last_status}]"
+  local line2="${prompt} "
+
+  PS1="${line1}\n${line2}"
+}
+
+PROMPT_COMMAND=__ps1
+
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUPSTREAM=auto
+
