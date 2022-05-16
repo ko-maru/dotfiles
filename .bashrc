@@ -24,11 +24,11 @@ HISTCONTROL=ignoredups
 HISTTIMEFORMAT="%F %T "
 
 # aliases
-[ -f ./.bash_aliases ] && . .bash_aliases
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
-[ -f ./git-completion.bash ] && . ./git-completion.bash
-[ -f ./git-prompt.sh ] && . ./git-prompt.sh
-[ -f ./.bash_prompt ] && . .bash_prompt
+[ -f ~/git-completion.bash ] && . ~/git-completion.bash
+[ -f ~/git-prompt.sh ] && . ~/git-prompt.sh
+[ -f ~/.bash_prompt ] && . ~/.bash_prompt
 
 # fzf
 [ -f /usr/share/fzf/key-bindings.bash ] && . /usr/share/fzf/key-bindings.bash

@@ -1,20 +1,17 @@
+" load vim config
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-
 source ~/.vimrc
-set nocompatible
+
+" general
+syntax on
+filetype plugin indent on
 
 " file
 set autoread
 set encoding=utf-8
 set nobackup
-set hidden"
-
-"
-" syntax highlighting
-"
-syntax on
-filetype plugin indent on
+set hidden
 
 "
 " edit
@@ -22,35 +19,30 @@ filetype plugin indent on
 set backspace=indent,eol,start
 
 "
-" terminal
-"
-set clipboard^=unnamedplus
-set mouse=a
-
-"
 " indentation
 "
 set autoindent
 set expandtab
 set smartindent
-set shiftwidth=2
-set softtabstop=2
 set tabstop=2
+set shiftwidth=2
 
 "
 " view
 "
-set ambiwidth=double
 set background=dark
 set cursorline
 set laststatus=2
 set linebreak
+set list
+set listchars=tab:>-,trail:-,nbsp:+
 set number
 set relativenumber
 set ruler
 set showcmd
 set showmatch
 set noshowmode
+set updatetime=100
 set virtualedit=onemore
 set visualbell
 set wildmenu
@@ -72,17 +64,40 @@ set wrapscan
 set history=1000
 
 "
-" Key maps
+" terminal integration
 "
-let mapleader = " "
-inoremap jk <ESC>
+set clipboard^=unnamedplus
+set mouse=a
+if (has("termguicolors"))
+  set termguicolors
+endif
 
-noremap j gj
-noremap k gk
+
+" leader
+let mapleader = "\<Space>"
+let maplocalleader = "<Bslash>"
+
+inoremap jk <Esc>
+
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+nnoremap Q gq
+nnoremap gQ Q
+
+nnoremap <C-j> :bnext<CR>
+nnoremap <C-k> :bprevious<CR>
 
 nnoremap <leader><space> :noh<cr>
 
-"
-" plugins
-"
-source ~/.config/nvim/plugin.vim
+" auto reload vimrc
+augroup vimrc
+  autocmd!
+  autocmd BufWritePost init.vim source <afile>
+augroup END
+
+if has('nvim')
+  lua require('plugins')
+endif
