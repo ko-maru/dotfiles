@@ -52,6 +52,6 @@ main() {
   create_symlinks
 }
 
-if ! (return 0 2>/dev/null) then;
+if ! (return 0 2>/dev/null); then
   main
 fi
