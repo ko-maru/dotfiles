@@ -101,7 +101,19 @@ require('packer').startup(function(use)
     config = get_config('nvim-treesitter')
   }
 
-  use 'tpope/vim-fugitive'
+  use {
+    'tpope/vim-fugitive',
+    config = function()
+      vim.keymap.set('n', '<leader>ga', ":Git add .<CR>", { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>gb', ":Git blame<CR>", { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>gc', ":Git commit<CR>", { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>gdw', ":Git diff<CR>", { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>gdi', ":Git diff --cached<CR>", { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>gll', ":Git log<CR>", { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>glo', ":Git log --oneline<CR>", { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>gs', ":Git<CR>", { noremap = true, silent = true })
+    end
+  }
   use {
     'lewis6991/gitsigns.nvim',
     config = function()

@@ -5,4 +5,12 @@ source ~/.vimrc
 source $HOME/.config/nvim/options.vim
 source $HOME/.config/nvim/mappings.vim
 
-lua require('plugins')
+if has('nvim')
+  lua require('plugins')
+endif
+
+" auto reload vimrc
+augroup vimrc
+  autocmd!
+  autocmd BufWritePost init.vim source <afile>
+augroup END

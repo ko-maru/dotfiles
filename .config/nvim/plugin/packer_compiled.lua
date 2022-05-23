@@ -237,6 +237,7 @@ _G.packer_plugins = {
     url = "https://github.com/folke/trouble.nvim"
   },
   ["vim-fugitive"] = {
+    config = { "\27LJ\2\n˜\5\0\0\6\0\28\0A6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0005\5\6\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\a\0'\4\b\0005\5\t\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\n\0'\4\v\0005\5\f\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\r\0'\4\14\0005\5\15\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\16\0'\4\17\0005\5\18\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\19\0'\4\20\0005\5\21\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\22\0'\4\23\0005\5\24\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\25\0'\4\26\0005\5\27\0B\0\5\1K\0\1\0\1\0\2\vsilent\2\fnoremap\2\r:Git<CR>\15<leader>gs\1\0\2\vsilent\2\fnoremap\2\27:Git log --oneline<CR>\16<leader>glo\1\0\2\vsilent\2\fnoremap\2\17:Git log<CR>\16<leader>gll\1\0\2\vsilent\2\fnoremap\2\27:Git diff --cached<CR>\16<leader>gdi\1\0\2\vsilent\2\fnoremap\2\18:Git diff<CR>\16<leader>gdw\1\0\2\vsilent\2\fnoremap\2\20:Git commit<CR>\15<leader>gc\1\0\2\vsilent\2\fnoremap\2\19:Git blame<CR>\15<leader>gb\1\0\2\vsilent\2\fnoremap\2\19:Git add .<CR>\15<leader>ga\6n\bset\vkeymap\bvim\0" },
     loaded = true,
     path = "/home/koki/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
@@ -249,49 +250,53 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require("plugins/nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-require("plugins/trouble")
-time([[Config for trouble.nvim]], false)
--- Config for: iceberg.vim
-time([[Config for iceberg.vim]], true)
-try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\24colorscheme iceberg\bcmd\bvim\0", "config", "iceberg.vim")
-time([[Config for iceberg.vim]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-require("plugins/nvim-cmp")
-time([[Config for nvim-cmp]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-require("plugins/nvim-lspconfig")
-time([[Config for nvim-lspconfig]], false)
 -- Config for: lualine.nvim
 time([[Config for lualine.nvim]], true)
 require("plugins/lualine")
 time([[Config for lualine.nvim]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+require("plugins/trouble")
+time([[Config for trouble.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require("plugins/nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: vim-fugitive
+time([[Config for vim-fugitive]], true)
+try_loadstring("\27LJ\2\n˜\5\0\0\6\0\28\0A6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0005\5\6\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\a\0'\4\b\0005\5\t\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\n\0'\4\v\0005\5\f\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\r\0'\4\14\0005\5\15\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\16\0'\4\17\0005\5\18\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\19\0'\4\20\0005\5\21\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\22\0'\4\23\0005\5\24\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\25\0'\4\26\0005\5\27\0B\0\5\1K\0\1\0\1\0\2\vsilent\2\fnoremap\2\r:Git<CR>\15<leader>gs\1\0\2\vsilent\2\fnoremap\2\27:Git log --oneline<CR>\16<leader>glo\1\0\2\vsilent\2\fnoremap\2\17:Git log<CR>\16<leader>gll\1\0\2\vsilent\2\fnoremap\2\27:Git diff --cached<CR>\16<leader>gdi\1\0\2\vsilent\2\fnoremap\2\18:Git diff<CR>\16<leader>gdw\1\0\2\vsilent\2\fnoremap\2\20:Git commit<CR>\15<leader>gc\1\0\2\vsilent\2\fnoremap\2\19:Git blame<CR>\15<leader>gb\1\0\2\vsilent\2\fnoremap\2\19:Git add .<CR>\15<leader>ga\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
+time([[Config for vim-fugitive]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: iceberg.vim
+time([[Config for iceberg.vim]], true)
+try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\24colorscheme iceberg\bcmd\bvim\0", "config", "iceberg.vim")
+time([[Config for iceberg.vim]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 require("plugins/telescope")
 time([[Config for telescope.nvim]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+require("plugins/nvim-lspconfig")
+time([[Config for nvim-lspconfig]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require("plugins/nvim-cmp")
+time([[Config for nvim-cmp]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescript ++once lua require("packer.load")({'emmet-vim'}, { ft = "typescript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
 vim.cmd [[au FileType html ++once lua require("packer.load")({'emmet-vim'}, { ft = "html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType css ++once lua require("packer.load")({'emmet-vim'}, { ft = "css" }, _G.packer_plugins)]]
 vim.cmd [[au FileType scss ++once lua require("packer.load")({'emmet-vim'}, { ft = "scss" }, _G.packer_plugins)]]
-vim.cmd [[au FileType javascript ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
-vim.cmd [[au FileType typescript ++once lua require("packer.load")({'emmet-vim'}, { ft = "typescript" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

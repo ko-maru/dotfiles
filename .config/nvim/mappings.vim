@@ -4,15 +4,15 @@ let maplocalleader = "<Bslash>"
 
 inoremap jk <Esc>
 
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 
-noremap Q gq
-noremap gQ Q
+nnoremap Q gq
+nnoremap gQ Q
 
-noremap <C-j> :bnext<CR>
-noremap <C-k> :bprevious<CR>
+nnoremap <C-j> :bnext<CR>
+nnoremap <C-k> :bprevious<CR>
 
 nnoremap <leader><space> :noh<cr>

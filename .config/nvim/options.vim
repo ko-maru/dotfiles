@@ -38,6 +38,8 @@ set background=dark
 set cursorline
 set laststatus=2
 set linebreak
+set list
+set listchars=tab:>-,trail:-,nbsp:+
 set number
 set relativenumber
 set ruler
@@ -64,3 +66,4 @@ set wrapscan
 " history
 "
 set history=1000
+
