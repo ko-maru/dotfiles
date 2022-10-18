@@ -46,9 +46,10 @@ require('trouble').setup({
     use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 })
 
-vim.keymap.set("n", "<leader>xx", "<cmd>Trouble<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
+local opt = { silent = true, noremap = true }
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble<cr>", opt)
+vim.keymap.set("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", opt)
+vim.keymap.set("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", opt)
+vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", opt)
+vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opt)
 vim.keymap.set("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true})

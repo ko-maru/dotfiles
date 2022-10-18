@@ -1,7 +1,7 @@
-vim.go.completeopt = "menu,menuone,noselect"
+vim.opt.completeopt = "menu,menuone,noselect"
 
-local luasnip = require 'luasnip'
-local cmp = require 'cmp'
+local cmp = require('cmp')
+local luasnip = require('luasnip')
 
 cmp.setup {
   snippet = {
@@ -38,23 +38,19 @@ cmp.setup {
     end, { 'i', 's' }),
   }),
   sources = {
-    { name = 'buffer' },
-    { name = 'luasnip' },
     { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'path' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
   },
 }
 
--- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources({
     { name = 'buffer' },
   })
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
@@ -65,8 +61,8 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+      { name = 'path' }
   }, {
       { name = 'cmdline' }
-    })
+  })
 })

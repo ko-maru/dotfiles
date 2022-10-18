@@ -1,9 +1,11 @@
-require('lualine').setup {
+local lualine = require('lualine')
+
+lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'iceberg_dark',
-    component_separators = '',
-    section_separators = '',
+    theme = 'OceanicNext',
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
   },
   sections = {
     lualine_a = { 'mode' },
@@ -16,7 +18,14 @@ require('lualine').setup {
       }
     },
     lualine_c = { 'filename' },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_x = { 
+      'encoding', 
+      {
+        'fileformat',
+        icons_enabled = false
+      },
+      'filetype' 
+    },
     lualine_y = { 'progress' },
     lualine_z = { 'location' },
   },
@@ -24,13 +33,14 @@ require('lualine').setup {
     lualine_a = {
       {
         'buffers',
-        mode = 2,
+        mode = 0,
         max_length = vim.o.columns
       }
     },
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
-    lualine_y = {}, lualine_z = {},
+    lualine_y = {}, 
+    lualine_z = {},
   }
 }

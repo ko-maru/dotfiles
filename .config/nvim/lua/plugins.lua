@@ -1,9 +1,16 @@
 -- install packer automatically
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = vim.fn.stdpath 'data'..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'plugins.lua' })
@@ -12,14 +19,55 @@ function get_config(name)
   return string.format('require("plugins/%s")', name)
 end
 
--- install plugins 
 require('packer').startup(function(use)
   -- package manager
   use 'wbthomason/packer.nvim'
-
+  -- colorscheme
+  use { 'mhartington/oceanic-next', config = function() vim.cmd[[colorscheme OceanicNext]] end }
+  -- statusline
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = get_config('lualine')
+  }
+  -- language server manager
+  use { "williamboman/mason.nvim", config = function() require('mason').setup() end }
+  use {
+    "williamboman/mason-lspconfig.nvim",
+    config = function() require('mason-lspconfig').setup() end
+  }
+  -- LSP config
+  use { 'neovim/nvim-lspconfig', config = get_config('nvim-lspconfig') }
+  use { 
+    "jose-elias-alvarez/null-ls.nvim", 
+    requires = { "nvim-lua/plenary.nvim" },
+    config = get_config('null-ls')
+  }
+  -- snippet
+  use 'L3MON4D3/LuaSnip'
+  -- autocompletion 
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-cmdline'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-path'},
+      {'saadparwaiz1/cmp_luasnip'}
+    },
+    config = get_config('nvim-cmp')
+  }
+  -- icons
+  use 'kyazdani42/nvim-web-devicons'
+  -- trouble
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = get_config('trouble')
+  }
   -- file explorer
   use {
-    'lambdalisue/fern.vim',
+    {'lambdalisue/fern.vim', config = get_config('fern') },
     'lambdalisue/fern-hijack.vim',
     'lambdalisue/fern-git-status.vim',
     {
@@ -27,61 +75,7 @@ require('packer').startup(function(use)
       requires = { 'lambdalisue/nerdfont.vim' }
     }
   }
-
-  use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = get_config('trouble')
-  }
-
-
-  -- theme
-  use {
-    'cocopon/iceberg.vim', 
-    config =  function()
-      vim.cmd[[colorscheme iceberg]]
-    end
-  }
-
-  use { 
-    'nvim-lualine/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true },
-    config = get_config('lualine')
-  }
-
-  use { 
-    'neovim/nvim-lspconfig',
-    config = get_config('nvim-lspconfig')
-  }
-  use 'williamboman/nvim-lsp-installer'
-
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
-
-  use {
-    'hrsh7th/nvim-cmp',
-    requires = {
-      {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-cmdline'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-nvim-lsp-signature-help'},
-      {'hrsh7th/cmp-path'},
-      {'saadparwaiz1/cmp_luasnip'}
-    },
-    config = get_config('nvim-cmp')
-  }
-
-  use 'editorconfig/editorconfig-vim'
-  use 'norcalli/nvim-colorizer.lua'
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'machakann/vim-sandwich'
-  use { 
-    'mattn/emmet-vim', 
-    ft = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }, 
-    config = function()
-      vim.cmd[[EmmetInstall]]
-    end
-  }
-
+  -- fuzzy finder
   use { 
     'nvim-telescope/telescope.nvim', 
     requires = {
@@ -91,57 +85,36 @@ require('packer').startup(function(use)
     },
     config = get_config('telescope')
   }
-
+  -- syntax highlight
   use {
     'nvim-treesitter/nvim-treesitter', 
     run = ':TSUpdate',
-    requires = {
-     'nvim-treesitter/nvim-treesitter-textobjects'
-    },
     config = get_config('nvim-treesitter')
   }
-
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'norcalli/nvim-colorizer.lua'
+  -- git
   use {
     'tpope/vim-fugitive',
-    config = function()
-      vim.keymap.set('n', '<leader>ga', ":Git add .<CR>", { noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>gb', ":Git blame<CR>", { noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>gc', ":Git commit<CR>", { noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>gdw', ":Git diff<CR>", { noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>gdi', ":Git diff --cached<CR>", { noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>gll', ":Git log<CR>", { noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>glo', ":Git log --oneline<CR>", { noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>gs', ":Git<CR>", { noremap = true, silent = true })
-    end
+    config = get_config('vim-fugitive')
+  }
+  use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
+  -- edit
+  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
+  use 'machakann/vim-sandwich'
+  use {
+    'editorconfig/editorconfig-vim',
+    config = function() vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' } end,
   }
   use {
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup()
-    end
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
   }
+  -- markdown preview
+  use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end }
 
   if packer_bootstrap then
     require('packer').sync()
   end
 end)
-
--- fern
-vim.keymap.set('n', '<leader>e', ":Fern . -drawer -toggle -reveal=%<CR>", { noremap=true, silent=true })
-
-vim.g['fern#default_hidden'] = 1
-vim.g['fern#renderer'] = "nerdfont"
-
--- EditorConfig
-vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' }
-
-require('colorizer').setup()
-
--- Comment
-require('Comment').setup() 
-
--- LSP settings
-require('nvim-lsp-installer').setup {
-  automatic_installation = true
-}
 
