@@ -1,120 +1,109 @@
--- install packer automatically
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = vim.fn.stdpath 'data'..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+local fn = vim.fn
+
+-- Automatically install packer.nvim
+local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  PACKER_BOOTSTRAP = fn.system({
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
+    install_path
+  })
+  vim.cmd [[packadd packer.nvim]]
 end
 
-local packer_bootstrap = ensure_packer()
+-- Autocommand to reload plugins.lua file on save
+local packer_augroup = vim.api.nvim_create_augroup('packer', {})
+vim.api.nvim_create_autocmd(
+  'BufWritePost',
+  {
+    group = packer_augroup,
+    pattern = 'plugins.lua',
+    command = 'source <afile> | PackerCompile'
+  }
+)
 
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'plugins.lua' })
-
-function get_config(name)
-  return string.format('require("plugins/%s")', name)
+-- Include 'packer' module
+local ok, packer = pcall(require, 'packer')
+if not ok then
+  print "packer.nvim does not exist"
+  return
 end
 
-require('packer').startup(function(use)
-  -- package manager
-  use 'wbthomason/packer.nvim'
-  -- colorscheme
-  use { 'mhartington/oceanic-next', config = function() vim.cmd[[colorscheme OceanicNext]] end }
-  -- statusline
+-- Use popup window
+packer.init {
+  display = {
+    open_fn = function()
+      return require('packer.util').float { border = 'rounded' }
+    end,
+  },
+}
+
+-- Install plugins
+return packer.startup(function(use)
+  -- Plugin manager
+  use { 'wbthomason/packer.nvim' }
+  -- Library
+  use "nvim-lua/plenary.nvim"
+  -- Icon
+  use { "kyazdani42/nvim-web-devicons", opt = true }
+  -- Colorscheme
+  use { 'cocopon/iceberg.vim' }
+  use { 'EdenEast/nightfox.nvim' }
+  use { "ellisonleao/gruvbox.nvim" }
+  -- Statusline
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = get_config('lualine')
+    config = 'require "plugin/lualine"',
   }
-  -- language server manager
-  use { "williamboman/mason.nvim", config = function() require('mason').setup() end }
-  use {
-    "williamboman/mason-lspconfig.nvim",
-    config = function() require('mason-lspconfig').setup() end
-  }
-  -- LSP config
-  use { 'neovim/nvim-lspconfig', config = get_config('nvim-lspconfig') }
-  use { 
-    "jose-elias-alvarez/null-ls.nvim", 
-    requires = { "nvim-lua/plenary.nvim" },
-    config = get_config('null-ls')
-  }
-  -- snippet
+  -- LSP Configuration
+  use { 'neovim/nvim-lspconfig', config = 'require "plugin/lspconfig"' }
+  -- Snippets plugin
   use 'L3MON4D3/LuaSnip'
-  -- autocompletion 
-  use {
-    'hrsh7th/nvim-cmp',
-    requires = {
-      {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-cmdline'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-path'},
-      {'saadparwaiz1/cmp_luasnip'}
-    },
-    config = get_config('nvim-cmp')
-  }
-  -- icons
-  use 'kyazdani42/nvim-web-devicons'
-  -- trouble
+  -- Autocompletion
+  use { 'hrsh7th/nvim-cmp', config = 'require "plugin/nvim-cmp"' }
+  -- LSP source for nvim-cmp
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'saadparwaiz1/cmp_luasnip'
+  -- LSP UI
+  use { 'kkharji/lspsaga.nvim', config = 'require("plugin/lspsaga")'}
+  -- Package manager for LSP servers, DAP servers, linters and formatters
+  use { "williamboman/mason.nvim", config = 'require("plugin/mason")' }
+  use "williamboman/mason-lspconfig.nvim"
+  -- Automatically creates missing LSP diagnostics highlight groups for color schemes
+  use 'folke/lsp-colors.nvim'
   use {
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = get_config('trouble')
+    config = 'require("plugin/trouble")'
   }
-  -- file explorer
+  -- Treesitter
   use {
-    {'lambdalisue/fern.vim', config = get_config('fern') },
-    'lambdalisue/fern-hijack.vim',
-    'lambdalisue/fern-git-status.vim',
-    {
-      'lambdalisue/fern-renderer-nerdfont.vim',
-      requires = { 'lambdalisue/nerdfont.vim' }
-    }
-  }
-  -- fuzzy finder
-  use { 
-    'nvim-telescope/telescope.nvim', 
-    requires = {
-      { 'nvim-lua/plenary.nvim' },
-      { 'BurntSushi/ripgrep', opt = true },
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-    },
-    config = get_config('telescope')
-  }
-  -- syntax highlight
-  use {
-    'nvim-treesitter/nvim-treesitter', 
+    'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = get_config('nvim-treesitter')
+    config = 'require("plugin/treesitter")'
   }
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'norcalli/nvim-colorizer.lua'
-  -- git
+  -- Fuzzy finder
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use { "nvim-telescope/telescope-file-browser.nvim" }
   use {
-    'tpope/vim-fugitive',
-    config = get_config('vim-fugitive')
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.0',
+    config = 'require("plugin/telescope")'
   }
-  use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
-  -- edit
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'machakann/vim-sandwich'
+  -- Git
+  use { 'tpope/vim-fugitive' }
   use {
-    'editorconfig/editorconfig-vim',
-    config = function() vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' } end,
+    'lewis6991/gitsigns.nvim',
+    config = 'require("plugin/gitsigns")'
   }
-  use {
-    "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
-  }
-  -- markdown preview
-  use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end }
 
-  if packer_bootstrap then
-    require('packer').sync()
+
+  if PACKER_BOOTSTRAP then
+    packer.sync()
   end
 end)
-

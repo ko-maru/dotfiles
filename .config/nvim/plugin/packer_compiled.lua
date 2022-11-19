@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/koki/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/koki/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/koki/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/koki/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/koki/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/k-maruyama/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/k-maruyama/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/k-maruyama/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/k-maruyama/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/k-maruyama/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -74,260 +74,185 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["Comment.nvim"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/Comment.nvim",
-    url = "https://github.com/numToStr/Comment.nvim"
-  },
   LuaSnip = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
   ["cmp-buffer"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/cmp-buffer",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
   ["cmp-cmdline"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
     url = "https://github.com/hrsh7th/cmp-cmdline"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
   ["cmp-path"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/cmp-path",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
   cmp_luasnip = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["editorconfig-vim"] = {
-    config = { '\27LJ\2\nQ\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\18fugitive://.*"EditorConfig_exclude_patterns\6g\bvim\0' },
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/editorconfig-vim",
-    url = "https://github.com/editorconfig/editorconfig-vim"
-  },
-  ["fern-git-status.vim"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/fern-git-status.vim",
-    url = "https://github.com/lambdalisue/fern-git-status.vim"
-  },
-  ["fern-hijack.vim"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/fern-hijack.vim",
-    url = "https://github.com/lambdalisue/fern-hijack.vim"
-  },
-  ["fern-renderer-nerdfont.vim"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/fern-renderer-nerdfont.vim",
-    url = "https://github.com/lambdalisue/fern-renderer-nerdfont.vim"
-  },
-  ["fern.vim"] = {
-    config = { 'require("plugins/fern")' },
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/fern.vim",
-    url = "https://github.com/lambdalisue/fern.vim"
-  },
   ["gitsigns.nvim"] = {
-    config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
+    config = { 'require("plugin/gitsigns")' },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  ["lualine.nvim"] = {
-    config = { 'require("plugins/lualine")' },
+  ["gruvbox.nvim"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
+    url = "https://github.com/ellisonleao/gruvbox.nvim"
+  },
+  ["iceberg.vim"] = {
+    loaded = true,
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/iceberg.vim",
+    url = "https://github.com/cocopon/iceberg.vim"
+  },
+  ["lsp-colors.nvim"] = {
+    loaded = true,
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim",
+    url = "https://github.com/folke/lsp-colors.nvim"
+  },
+  ["lspsaga.nvim"] = {
+    config = { 'require("plugin/lspsaga")' },
+    loaded = true,
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/kkharji/lspsaga.nvim"
+  },
+  ["lualine.nvim"] = {
+    config = { 'require "plugin/lualine"' },
+    loaded = true,
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["markdown-preview.nvim"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
-    url = "https://github.com/iamcco/markdown-preview.nvim"
-  },
   ["mason-lspconfig.nvim"] = {
-    config = { "\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20mason-lspconfig\frequire\0" },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
   ["mason.nvim"] = {
-    config = { "\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0" },
+    config = { 'require("plugin/mason")' },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
-  ["nerdfont.vim"] = {
+  ["nightfox.nvim"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/nerdfont.vim",
-    url = "https://github.com/lambdalisue/nerdfont.vim"
-  },
-  ["null-ls.nvim"] = {
-    config = { 'require("plugins/null-ls")' },
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
-  },
-  ["nvim-autopairs"] = {
-    config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
-    url = "https://github.com/windwp/nvim-autopairs"
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
   },
   ["nvim-cmp"] = {
-    config = { 'require("plugins/nvim-cmp")' },
+    config = { 'require "plugin/nvim-cmp"' },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
-  ["nvim-colorizer.lua"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
-    url = "https://github.com/norcalli/nvim-colorizer.lua"
-  },
   ["nvim-lspconfig"] = {
-    config = { 'require("plugins/nvim-lspconfig")' },
+    config = { 'require "plugin/lspconfig"' },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
-    config = { 'require("plugins/nvim-treesitter")' },
+    config = { 'require("plugin/treesitter")' },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["nvim-treesitter-textobjects"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
-    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
-  },
   ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
-  },
-  ["oceanic-next"] = {
-    config = { "\27LJ\2\n;\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\28colorscheme OceanicNext\bcmd\bvim\0" },
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/oceanic-next",
-    url = "https://github.com/mhartington/oceanic-next"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ripgrep = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/opt/ripgrep",
-    url = "https://github.com/BurntSushi/ripgrep"
+  ["telescope-file-browser.nvim"] = {
+    loaded = true,
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
+    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
-    config = { 'require("plugins/telescope")' },
+    config = { 'require("plugin/telescope")' },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["trouble.nvim"] = {
-    config = { 'require("plugins/trouble")' },
+    config = { 'require("plugin/trouble")' },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/trouble.nvim",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
   ["vim-fugitive"] = {
-    config = { 'require("plugins/vim-fugitive")' },
     loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    path = "/home/k-maruyama/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-sandwich"] = {
-    loaded = true,
-    path = "/home/koki/.local/share/nvim/site/pack/packer/start/vim-sandwich",
-    url = "https://github.com/machakann/vim-sandwich"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: oceanic-next
-time([[Config for oceanic-next]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\28colorscheme OceanicNext\bcmd\bvim\0", "config", "oceanic-next")
-time([[Config for oceanic-next]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-require("plugins/trouble")
-time([[Config for trouble.nvim]], false)
--- Config for: mason-lspconfig.nvim
-time([[Config for mason-lspconfig.nvim]], true)
-try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20mason-lspconfig\frequire\0", "config", "mason-lspconfig.nvim")
-time([[Config for mason-lspconfig.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
--- Config for: null-ls.nvim
-time([[Config for null-ls.nvim]], true)
-require("plugins/null-ls")
-time([[Config for null-ls.nvim]], false)
--- Config for: mason.nvim
-time([[Config for mason.nvim]], true)
-try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
-time([[Config for mason.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require("plugins/nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
-require("plugins/nvim-cmp")
+require "plugin/nvim-cmp"
 time([[Config for nvim-cmp]], false)
--- Config for: fern.vim
-time([[Config for fern.vim]], true)
-require("plugins/fern")
-time([[Config for fern.vim]], false)
--- Config for: vim-fugitive
-time([[Config for vim-fugitive]], true)
-require("plugins/vim-fugitive")
-time([[Config for vim-fugitive]], false)
--- Config for: editorconfig-vim
-time([[Config for editorconfig-vim]], true)
-try_loadstring('\27LJ\2\nQ\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\18fugitive://.*"EditorConfig_exclude_patterns\6g\bvim\0', "config", "editorconfig-vim")
-time([[Config for editorconfig-vim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
-require("plugins/nvim-lspconfig")
+require "plugin/lspconfig"
 time([[Config for nvim-lspconfig]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require("plugins/telescope")
-time([[Config for telescope.nvim]], false)
 -- Config for: lualine.nvim
 time([[Config for lualine.nvim]], true)
-require("plugins/lualine")
+require "plugin/lualine"
 time([[Config for lualine.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require("plugin/treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+require("plugin/trouble")
+time([[Config for trouble.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+require("plugin/gitsigns")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+require("plugin/mason")
+time([[Config for mason.nvim]], false)
+-- Config for: lspsaga.nvim
+time([[Config for lspsaga.nvim]], true)
+require("plugin/lspsaga")
+time([[Config for lspsaga.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require("plugin/telescope")
+time([[Config for telescope.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
