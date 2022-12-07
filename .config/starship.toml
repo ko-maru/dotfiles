@@ -1,0 +1,18 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+right_format = """$time"""
+palette = "gruvbox"
+
+[palettes.gruvbox]
+black = "#282828"
+red = "#cc241d"
+green = "#98971a"
+blue = "#458588"
+yellow = "#d79921"
+purple = "#b16286"
+cyan = "#689d6a"
+white = "#ebdbb2"
+
+[time]
+format = "[$time]($style) "
+disabled = false

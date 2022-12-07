@@ -12,6 +12,11 @@ keymap('n', '<C-e>', ':Telescope file_browser<CR>', {desc = 'File browser'})
 
 local telescope = require 'telescope'
 telescope.setup {
+  pickers = {
+    find_files = {
+      hidden = true
+    }
+  },
   extensions = {
     file_browser = {
       hijack_netrw = true,

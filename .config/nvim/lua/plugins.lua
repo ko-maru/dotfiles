@@ -101,6 +101,8 @@ return packer.startup(function(use)
     'lewis6991/gitsigns.nvim',
     config = 'require("plugin/gitsigns")'
   }
+  -- DAP
+  use 'mfussenegger/nvim-dap'
 
 
   if PACKER_BOOTSTRAP then
