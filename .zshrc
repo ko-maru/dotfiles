@@ -1,5 +1,6 @@
-# Set up the prompt
+export EDITOR=vim
 
+# Set up the prompt
 autoload -Uz promptinit
 promptinit
 prompt walters
@@ -16,13 +17,16 @@ HISTFILE=~/.zsh_history
 
 setopt no_beep
 
+# Aliases
 alias ll='ls -lh'
 alias la='ls -lha'
 
 # asdf
-. "$HOME/.asdf/asdf.sh"
-# append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
+if [[ -d "$HOME/.asdf" ]] then
+  . "$HOME/.asdf/asdf.sh"
+  # append completions to fpath
+  fpath=(${ASDF_DIR}/completions $fpath)
+fi
 
 # Use modern completion system
 autoload -Uz compinit
