@@ -4,14 +4,14 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd $(dirname $0); pwd)"
 
-BASE_PACKAGES=(ca-certificate build-essential curl dirmngr fd-find gawk gcc git gnupg gpg g++ \
+BASE_PACKAGES=(ca-certificates build-essential curl dirmngr fd-find gawk gcc git gnupg gpg g++ \
   libbz2-dev libffi-dev liblzma-dev libncursesw5-dev libssl-dev libreadline-dev libsqlite3-dev \
   libxmlsec1 make man openssh-client ripgrep tk-dev wget unzip xz-utils zlib1g-dev zsh)
 
 install_base_packages() {
   sudo apt update -y
   sudo apt upgrade -y
-  sudo apt install -y --ignore-missing "${PACKAGES[@]}"
+  sudo apt install -y --ignore-missing "${BASE_PACKAGES[@]}"
 }
 
 install_asdf() {
