@@ -1,0 +1,17 @@
+{
+    "workspace.library": [
+        "/home/ko-maru/.config/nvim",
+        "/home/ko-maru/.local/share/nvim/site",
+        "/home/ko-maru/.local/share/nvim/site/pack/packer/start/everforest",
+        "/home/ko-maru/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+        "/home/ko-maru/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+        "/home/ko-maru/.local/share/nvim/site/pack/packer/start/mason.nvim",
+        "/home/ko-maru/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+        "/home/ko-maru/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+        "/home/ko-maru/.local/share/nvim/site/pack/packer/opt/packer.nvim",
+        "/squashfs-root/usr/share/nvim/runtime",
+        "/squashfs-root/usr/lib/nvim",
+        "${3rd}/luassert/library"
+    ],
+    "workspace.checkThirdParty": false
+}
