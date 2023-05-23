@@ -385,7 +385,12 @@ return {
     tag = '0.1.1',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = function()
-      local builtin = require("telescope.builtin")
+      local has_telescope, builtin = pcall(require, "telescope.builtin")
+
+      if not has_telescope then
+        return {}
+      end
+
       return {
         { "<leader>/",  builtin.live_grep,                                             desc = "Grep" },
         { "<leader>,",  function() builtin.buffers({ show_all_buffers = true }) end,   desc = "Buffers" },
@@ -454,4 +459,104 @@ return {
       }
     }
   },
+  {
+    "folke/trouble.nvim",
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = { use_diagnostic_signs = true },
+    keys = {
+      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
+      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
+      {
+        "[q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").previous({ skip_groups = true, jump = true })
+          else
+            vim.cmd.cprev()
+          end
+        end,
+        desc = "Previous trouble/quickfix item",
+      },
+      {
+        "]q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").next({ skip_groups = true, jump = true })
+          else
+            vim.cmd.cnext()
+          end
+        end,
+        desc = "Next trouble/quickfix item",
+      },
+    },
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "plenary.nvim",
+      "nvim-web-devicons",
+      "MunifTanjim/nui.nvim"
+    },
+    cmd = "Neotree",
+    keys = {
+      { "<leader>e", "<cmd>Neotree source=filesystem position=left reveal=true<cr>", desc = "Explorer" }
+    },
+    init = function()
+      vim.g.neo_tree_remove_legacy_commands = 1
+    end,
+    opts = {
+      default_component_configs = {
+        icon = {
+          folder_empty = "󰜌",
+          folder_empty_open = "󰜌",
+        },
+        git_status = {
+          symbols = {
+            renamed  = "󰁕",
+            unstaged = "󰄱",
+          },
+        },
+      },
+      document_symbols = {
+        kinds = {
+          File = { icon = "󰈙", hl = "Tag" },
+          Namespace = { icon = "󰌗", hl = "Include" },
+          Package = { icon = "󰏖", hl = "Label" },
+          Class = { icon = "󰌗", hl = "Include" },
+          Property = { icon = "󰆧", hl = "@property" },
+          Enum = { icon = "󰒻", hl = "@number" },
+          Function = { icon = "󰊕", hl = "Function" },
+          String = { icon = "󰀬", hl = "String" },
+          Number = { icon = "󰎠", hl = "Number" },
+          Array = { icon = "󰅪", hl = "Type" },
+          Object = { icon = "󰅩", hl = "Type" },
+          Key = { icon = "󰌋", hl = "" },
+          Struct = { icon = "󰌗", hl = "Type" },
+          Operator = { icon = "󰆕", hl = "Operator" },
+          TypeParameter = { icon = "󰊄", hl = "Type" },
+          StaticMethod = { icon = '󰠄 ', hl = 'Function' },
+        }
+      },
+      source_selector = {
+        sources = {
+          { source = "filesystem", display_name = " 󰉓 Files " },
+          { source = "git_status", display_name = " 󰊢 Git " },
+        },
+      },
+    },
+    config = function(_, opts)
+      vim.fn.sign_define("DiagnosticSignError",
+        { text = " ", texthl = "DiagnosticSignError" })
+      vim.fn.sign_define("DiagnosticSignWarn",
+        { text = " ", texthl = "DiagnosticSignWarn" })
+      vim.fn.sign_define("DiagnosticSignInfo",
+        { text = " ", texthl = "DiagnosticSignInfo" })
+      vim.fn.sign_define("DiagnosticSignHint",
+        { text = " ", texthl = "DiagnosticSignHint" })
+
+      require("neo-tree").setup(opts)
+    end
+  }
 }
