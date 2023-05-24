@@ -290,7 +290,17 @@ return {
     "echasnovski/mini.surround",
     version = "*",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      mappings = {
+        add = "gza",
+        delete = "gzd",
+        find = "gzf",
+        find_left = "gzF",
+        highlight = "gzh",
+        replace = "gzr",
+        update_n_lines = "gzn",
+      }
+    },
   },
   {
     "echasnovski/mini.comment",
@@ -453,11 +463,57 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
-    opts = {
-      options = {
-        globalstatus = true,
+    opts = function()
+      local icons = require("config").icons
+      return {
+        options = {
+          globalstatus = true,
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch" },
+          lualine_c = {
+            {
+              "diagnostics",
+              symbols = {
+                error = icons.diagnostics.error,
+                warn = icons.diagnostics.warn,
+                info = icons.diagnostics.info,
+                hint = icons.diagnostics.hint,
+              }
+            },
+            {
+              "filetype",
+              icon_only = true,
+              separator = "",
+              padding = {
+                left = 1, right = 0 }
+            },
+            { "filename", path = 1, symbols = { modified = " ", readonly = "", unnamed = "" } },
+            "encoding",
+          },
+          lualine_x = {
+            {
+              require("noice").api.status.command.get,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+              color = { fg = "#ff9e64" },
+            },
+            {
+              require("noice").api.status.mode.get,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+              color = { fg = "#ff9e64" },
+            },
+            "diff",
+          },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
+        },
+        tabline = {
+          lualine_a = { { "buffers", symbols = { alternate_file = "# " } } },
+        },
+        extensions = { "neo-tree", "lazy" },
       }
-    }
+    end
   },
   {
     "folke/trouble.nvim",
@@ -501,12 +557,14 @@ return {
     },
     cmd = "Neotree",
     keys = {
-      { "<leader>e", "<cmd>Neotree source=filesystem position=left reveal=true<cr>", desc = "Explorer" }
+      { "<leader>e",  "<cmd>Neotree source=filesystem position=left reveal=true<cr>",  desc = "Explorer" },
+      { "<leader>ge", "<cmd>Neotree source=git_status position=float reveal=true<cr>", desc = "Git Status" }
     },
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
     end,
     opts = {
+      close_if_last_window = true,
       default_component_configs = {
         icon = {
           folder_empty = "󰜌",
@@ -547,16 +605,77 @@ return {
       },
     },
     config = function(_, opts)
+      local icons = require("config").icons
+
       vim.fn.sign_define("DiagnosticSignError",
-        { text = " ", texthl = "DiagnosticSignError" })
+        { text = icons.diagnostics.error, texthl = "DiagnosticSignError" })
       vim.fn.sign_define("DiagnosticSignWarn",
-        { text = " ", texthl = "DiagnosticSignWarn" })
+        { text = icons.diagnostics.warn, texthl = "DiagnosticSignWarn" })
       vim.fn.sign_define("DiagnosticSignInfo",
-        { text = " ", texthl = "DiagnosticSignInfo" })
+        { text = icons.diagnostics.info, texthl = "DiagnosticSignInfo" })
       vim.fn.sign_define("DiagnosticSignHint",
-        { text = " ", texthl = "DiagnosticSignHint" })
+        { text = icons.diagnostics.hint, texthl = "DiagnosticSignHint" })
 
       require("neo-tree").setup(opts)
     end
-  }
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nui.nvim",
+      "rcarriga/nvim-notify"
+    },
+    opts = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        }
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+        inc_rename = false,
+        lsp_doc_border = false,
+      }
+    }
+  },
+  {
+    "stevearc/dressing.nvim",
+    opts = {}
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      filetype_exclude = { "checkhealth", "help", "man", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+      show_current_context = true,
+    },
+  },
+  {
+    "ggandor/leap.nvim",
+    keys = {
+      { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
+      { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
+      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+    },
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  },
+  {
+    "ggandor/flit.nvim",
+    keys = function()
+      local ret = {}
+      for _, key in ipairs({ "f", "F", "t", "T" }) do
+        ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
+      end
+      return ret
+    end,
+    opts = { labeled_modes = "nx" },
+  },
+  { "tpope/vim-repeat", event = "VeryLazy" },
 }
