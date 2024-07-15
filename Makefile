@@ -14,6 +14,7 @@ UNLINK_TARGETS	+= unlink-$(1)
 .PHONY: link-$(1)
 link-$(1):
 	@for dotfile in $(2); do
+		mkdir -p "$$$$(dirname "$$(HOME)/$$$${dotfile}")"
 		if [ -e "$$(DOTFILES_DIR)/$$$${dotfile}" ]; then
 			ln -snfv "$$(DOTFILES_DIR)/$$$${dotfile}" "$$(HOME)/$$$${dotfile}" 
 		fi

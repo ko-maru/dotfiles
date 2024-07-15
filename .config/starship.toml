@@ -1,0 +1,24 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$docker_context\
+$package\
+$dart\
+$dotnet\
+$cmd_duration\
+$lua\
+$nodejs\
+$rust\
+$swift\
+$aws\
+$gcloud\
+$line_break\
+$jobs\
+$container\
+$character"""
