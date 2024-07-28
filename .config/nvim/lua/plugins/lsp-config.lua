@@ -3,9 +3,18 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
+    "nvimdev/lspsaga.nvim",
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
+    require("lspsaga").setup({
+      symbol_in_winbar = {
+        show_file = false,
+      },
+    })
+
+    local function aaa() end
+
     local lspconfig = require("lspconfig")
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -14,20 +23,23 @@ return {
         local opts = { buffer = ev.buf, silent = true }
 
         opts.desc = "List LSP references"
-        vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
+        vim.keymap.set("n", "gr", builtin.lsp_references, opts)
 
         opts.desc = "List LSP definitions"
-        vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
+        vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<cr>", opts)
+
+        opts.desc = "List LSP type definitions"
+        vim.keymap.set("n", "gt", "<cmd>Lspsaga peek_type_definition<cr>", opts)
 
         opts.desc = "List LSP implementations"
-        vim.keymap.set('n', 'gD', builtin.lsp_implementations, opts)
+        vim.keymap.set("n", "gD", builtin.lsp_implementations, opts)
 
         opts.desc = "Show code actions"
-        vim.keymap.set({ 'n', 'v' }, "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
 
         opts.desc = "Rename symbol"
-        vim.keymap.set('n', "<leader>rn", vim.lsp.buf.rename, opts)
-      end
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+      end,
     })
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -41,7 +53,7 @@ return {
       ["emmet_ls"] = function()
         lspconfig["emmet_ls"].setup({
           capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css" }
+          filetypes = { "html", "typescriptreact", "javascriptreact", "css" },
         })
       end,
       ["lua_ls"] = function()
@@ -60,5 +72,5 @@ return {
         })
       end,
     })
-  end
+  end,
 }

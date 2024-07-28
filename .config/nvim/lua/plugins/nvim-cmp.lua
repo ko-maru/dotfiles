@@ -24,11 +24,13 @@ return {
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
-        end
+        end,
       },
       mapping = cmp.mapping.preset.insert({
-        ['<cr>'] = cmp.mapping(function(fallback) fallback() end),
-        ['<c-y>'] = cmp.mapping(function(fallback)
+        ["<cr>"] = cmp.mapping(function(fallback)
+          fallback()
+        end),
+        ["<c-y>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             if luasnip.expandable() then
               luasnip.expand()
@@ -39,21 +41,21 @@ return {
             fallback()
           end
         end),
-        ['<c-e>'] = cmp.mapping.abort(),
-        ['<tab>'] = cmp.mapping(function(fallback)
+        ["<c-e>"] = cmp.mapping.abort(),
+        ["<tab>"] = cmp.mapping(function(fallback)
           if luasnip.locally_jumpable(1) then
             luasnip.jump(1)
           else
             fallback()
           end
         end, { "i", "s" }),
-        ['<s-tab>'] = cmp.mapping(function(fallback)
+        ["<s-tab>"] = cmp.mapping(function(fallback)
           if luasnip.locally_jumpable(-1) then
             luasnip.jump(-1)
           else
             fallback()
           end
-        end, { "i", "s" })
+        end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
@@ -69,21 +71,21 @@ return {
       },
     })
 
-    cmp.setup.cmdline('/', {
+    cmp.setup.cmdline("/", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
         { name = "buffer" },
       },
     })
 
-    cmp.setup.cmdline(':', {
+    cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = 'path' }
+        { name = "path" },
       }, {
-        { name = 'cmdline' }
+        { name = "cmdline" },
       }),
-      matching = { disallow_symbol_nonprefix_matching = false }
+      matching = { disallow_symbol_nonprefix_matching = false },
     })
-  end
+  end,
 }

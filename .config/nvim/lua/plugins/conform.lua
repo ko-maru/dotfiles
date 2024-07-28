@@ -1,5 +1,5 @@
 return {
-  'stevearc/conform.nvim',
+  "stevearc/conform.nvim",
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {
@@ -58,5 +58,5 @@ return {
   end,
   init = function()
     vim.o.formatexpr = "v.lua.require'conform'.formatexpr()"
-  end
+  end,
 }

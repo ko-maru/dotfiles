@@ -21,12 +21,12 @@ return {
     require("telescope").load_extension("fzf")
 
     local builtin = require("telescope.builtin")
-    vim.keymap.set('n', "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Find string in cwd" })
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Lists open buffers" })
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Lists available help tags" })
-    vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = "Lists previously open files" })
-    vim.keymap.set('n', '<leader>gc', builtin.git_bcommits, { desc = "List buffer's git commits" })
-    vim.keymap.set('n', '<leader>gC', builtin.git_commits, { desc = "List git commits" })
-  end
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" })
+    vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find string in cwd" })
+    vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Lists open buffers" })
+    vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Lists available help tags" })
+    vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Lists previously open files" })
+    vim.keymap.set("n", "<leader>gc", builtin.git_bcommits, { desc = "List buffer's git commits" })
+    vim.keymap.set("n", "<leader>gC", builtin.git_commits, { desc = "List git commits" })
+  end,
 }

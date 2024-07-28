@@ -6,6 +6,7 @@ return {
   config = function()
     local treesitter = require("nvim-treesitter.configs")
 
+    ---@diagnostic disable-next-line: missing-fields
     treesitter.setup({
       highlight = { enable = true },
       indent = { enable = true },
@@ -17,7 +18,7 @@ return {
           node_incremental = "<c-space>",
           scope_incremental = false,
           node_decremental = "<bs>",
-        }
+        },
       },
       ensure_installed = {
         "bash",
@@ -41,8 +42,8 @@ return {
         "tsx",
         "yaml",
         "vim",
-        "vimdoc"
+        "vimdoc",
       },
     })
-  end
+  end,
 }

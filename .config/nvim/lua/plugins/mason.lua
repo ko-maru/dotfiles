@@ -23,7 +23,7 @@ return {
         "prettierd",
         "stylua",
         "eslint_d",
-      }
+      },
     })
-  end
+  end,
 }

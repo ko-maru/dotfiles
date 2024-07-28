@@ -1,11 +1,12 @@
 return {
-  'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  "nvim-lualine/lualine.nvim",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     options = {
-      section_separators = '',
-      component_separators = '',
+      section_separators = "",
+      component_separators = "",
       global_status = true,
+      theme = "gruvbox-material",
     },
     sections = {
       lualine_x = {
@@ -13,11 +14,6 @@ return {
         {
           "fileformat",
           icons_enabled = false,
-          -- symbols = {
-          --   unix = "LF",
-          --   dos = "CRLF",
-          --   mac = "CR,
-          -- },
         },
         "filetype",
       },
