@@ -44,6 +44,9 @@ alias g='git'
 
 export PATH="$brew --prefix python)/libexec/bin:$PATH"
 
+# ssh agent
+eval $(keychain --eval --quiet ~/.ssh/id_ed25519)
+
 # fzf
 source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
