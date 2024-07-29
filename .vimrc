@@ -119,6 +119,10 @@ nnoremap <leader>, :e $MYVIMRC<cr>
 nnoremap + <c-a>
 nnoremap - <c-x>
 
+" lazygit / lazydocker
+nnoremap <expr><silent> <leader>gl ':!tmux popup -w90\% -h90\% -d '.getcwd().' -E lazygit<cr><cr>'
+nnoremap <expr><silent> <leader>cl ':!tmux popup -w90\% -h90\% -E lazydocker<cr><cr>'
+
 "---------------------------
 " Autocommands
 "---------------------------
