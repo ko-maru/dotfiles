@@ -4,14 +4,27 @@
   diffFilter = delta --color-only
 [init]
 	defaultBranch = main
-[user]
-	email = kokitechno@gmail.com
-	name = ko-maru
-[delta]
-  navigate = true
+[alias]
+  ci = commit
+  st = status
+  co = checkout
+  br = branch
+[fetch]
+  prune = true
 [merge]
   conflictstyle = diff3
+[rebase]
+  autostash = true
+  autosquash = true
+[push]
+  default = current
+[pull]
+	ff = only
 [diff]
   colorMoved = default
+[delta]
+  navigate = true
 [ghq]
 	root = ~/repos
+[include]
+  path = ~/.gitconfig.local
