@@ -7,15 +7,12 @@ return {
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
+    local lspconfig = require("lspconfig")
     require("lspsaga").setup({
       symbol_in_winbar = {
         show_file = false,
       },
     })
-
-    local function aaa() end
-
-    local lspconfig = require("lspconfig")
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)
@@ -32,13 +29,22 @@ return {
         vim.keymap.set("n", "gt", "<cmd>Lspsaga peek_type_definition<cr>", opts)
 
         opts.desc = "List LSP implementations"
-        vim.keymap.set("n", "gD", builtin.lsp_implementations, opts)
+        vim.keymap.set("n", "gI", builtin.lsp_implementations, opts)
 
         opts.desc = "Show code actions"
         vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
 
         opts.desc = "Rename symbol"
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
+
+        opts.desc = "Jump to the next diagnostics"
+        vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+
+        opts.desc = "Jump to the previous diagnostics"
+        vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+
+        opts.desc = "Hover document"
+        vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
       end,
     })
 
