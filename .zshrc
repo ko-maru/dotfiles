@@ -74,3 +74,6 @@ eval "$(zoxide init zsh)"
 # bat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
+
+# mise
+eval "$(~/.local/bin/mise activate zsh)"
