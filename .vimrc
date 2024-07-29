@@ -28,8 +28,10 @@ set ambiwidth=double
 set showmatch
 set display=lastline
 set list
-set listchars=tab:^\ ,trail:~
+set listchars=tab:>\ ,trail:-,nbsp:+
 set virtualedit=onemore
+set splitright
+set splitbelow
 
 if has('termguicolors')
   set termguicolors
@@ -112,6 +114,10 @@ nnoremap <silent> <esc><esc> <cmd>nohlsearch\|diffupdate\|normal! <c-l><cr>
 
 " Open setting
 nnoremap <leader>, :e $MYVIMRC<cr>
+
+" Increment and decrement
+nnoremap + <c-a>
+nnoremap - <c-x>
 
 "---------------------------
 " Autocommands

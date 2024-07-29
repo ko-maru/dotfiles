@@ -41,3 +41,33 @@ alias t='tmux'
 alias d='docker'
 ## git
 alias g='git'
+
+export PATH="$brew --prefix python)/libexec/bin:$PATH"
+
+# fzf
+source <(fzf --zsh)
+export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
+export FZF_DEFAULT_OPTS='--border --margin=0,1'
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}' --preview-window '~3'"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --strip-cwd-prefix --exclude .git"
+
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
+gfr() {
+  local repo=$(ghq list -p | fzf)
+  cd "${repo:-.}"
+}
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"

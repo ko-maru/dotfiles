@@ -1,5 +1,17 @@
+[core]
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
 [init]
 	defaultBranch = main
 [user]
 	email = kokitechno@gmail.com
 	name = ko-maru
+[delta]
+  navigate = true
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default
+[ghq]
+	root = ~/repos
