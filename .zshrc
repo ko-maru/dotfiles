@@ -76,4 +76,4 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 
 # mise
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$($(brew --prefix)/bin/mise activate zsh)"
