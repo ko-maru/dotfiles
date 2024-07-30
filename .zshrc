@@ -30,17 +30,11 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^p" history-beginning-search-backward-end
 bindkey "^n" history-beginning-search-forward-end
 
-# Aliases
+# Aliases & Functions
 ## ls
 alias la='ls -a'
 alias ll='ls -hl'
 alias lla='ls -ahl'
-## tmux
-alias t='tmux'
-## docker
-alias d='docker'
-## git
-alias g='git'
 
 export PATH="$brew --prefix python)/libexec/bin:$PATH"
 
@@ -54,18 +48,22 @@ export FZF_DEFAULT_OPTS='--border --margin=0,1'
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}' --preview-window '~3'"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --strip-cwd-prefix --exclude .git"
+export FZF_TMUX=1
+export FZF_TMUX_OPTS="-p 80%"
 
 _fzf_compgen_path() {
   fd --hidden --exclude .git . "$1"
 }
-
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-gfr() {
-  local repo=$(ghq list -p | fzf)
-  cd "${repo:-.}"
+f() {
+  if [ -n "$TMUX" ]; then
+    fzf-tmux -p80% $@
+  else
+    fzf
+  fi
 }
 
 # zoxide
@@ -77,3 +75,37 @@ export MANROFFOPT="-c"
 
 # mise
 eval "$($(brew --prefix)/bin/mise activate zsh)"
+
+## tmux
+alias t='tmux'
+
+## docker
+alias d='docker'
+
+cl() {
+  # open lazygit
+  if [ -n "$TMUX" ]; then
+    tmux popup -w90% -h90% -E lazydocker
+  else
+    lazydocker
+  fi
+}
+
+## git
+alias g='git'
+
+gl() {
+  # open lazygit
+  if [ -n "$TMUX" ]; then
+    tmux popup -w90% -h90% -E lazygit
+  else
+    lazygit
+  fi
+}
+
+gfr() {
+  local repo=$(ghq list -p | f)
+  cd "${repo:-.}"
+}
+
+
