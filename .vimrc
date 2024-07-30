@@ -32,6 +32,7 @@ set listchars=tab:>\ ,trail:-,nbsp:+
 set virtualedit=onemore
 set splitright
 set splitbelow
+set signcolumn=yes
 
 if has('termguicolors')
   set termguicolors

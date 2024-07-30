@@ -23,10 +23,10 @@ return {
         vim.keymap.set("n", "gr", builtin.lsp_references, opts)
 
         opts.desc = "List LSP definitions"
-        vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<cr>", opts)
+        vim.keymap.set("n", "gd", builtin.lsp_definitions, opts)
 
         opts.desc = "List LSP type definitions"
-        vim.keymap.set("n", "gt", "<cmd>Lspsaga peek_type_definition<cr>", opts)
+        vim.keymap.set("n", "gy", builtin.lsp_type_definitions, opts)
 
         opts.desc = "List LSP implementations"
         vim.keymap.set("n", "gI", builtin.lsp_implementations, opts)
