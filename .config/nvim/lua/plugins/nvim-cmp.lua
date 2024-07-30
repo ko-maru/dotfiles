@@ -13,11 +13,14 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim",
+    "zbirenbaum/copilot.lua",
+    "zbirenbaum/copilot-cmp",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
+    require("copilot_cmp").setup({})
     require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
@@ -58,6 +61,7 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
+        { name = "copilot" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },
@@ -67,6 +71,7 @@ return {
         format = require("lspkind").cmp_format({
           maxwidth = 50,
           ellipsis_char = "...",
+          symbol_map = { Copilot = "" },
         }),
       },
     })
