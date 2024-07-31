@@ -97,7 +97,7 @@ alias g='git'
 gl() {
   # open lazygit
   if [ -n "$TMUX" ]; then
-    tmux popup -w90% -h90% -E lazygit
+    tmux popup -w90% -h90% -d "$(pwd)" -E lazygit
   else
     lazygit
   fi
