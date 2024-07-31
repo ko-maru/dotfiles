@@ -8,11 +8,7 @@ return {
   },
   config = function()
     local lspconfig = require("lspconfig")
-    require("lspsaga").setup({
-      symbol_in_winbar = {
-        show_file = false,
-      },
-    })
+    require("lspsaga").setup({})
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)

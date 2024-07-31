@@ -7,6 +7,7 @@ return {
     require("mason-lspconfig").setup({
       ensure_installed = {
         "bashls",
+        "csharp_ls",
         "cssls",
         "emmet_ls",
         "html",
