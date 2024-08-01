@@ -57,20 +57,6 @@ set hidden
 set clipboard& clipboard+=unnamedplus
 set nomodeline
 
-if has('wsl')
-  let g:clipboard = {
-    \   'name': 'wsl-clipboard',
-    \   'copy': {
-    \      '+': 'clip.exe',
-    \      '*': 'clip.exe',
-    \    },
-    \   'paste': {
-    \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    \   },
-    \   'cache_enabled': 0,
-    \ }
-endif
 
 "---------------------------
 " Search
@@ -127,6 +113,10 @@ nnoremap <expr><silent> <leader>cl ':!tmux popup -w90\% -h90\% -E lazydocker<cr>
 "---------------------------
 " Autocommands
 "---------------------------
+if has('wsl')
+  autocmd! TextYankPost * :call system('iconv -t cp932 | clip.exe', @")
+endif
+
 augroup vimrc
   autocmd!
   autocmd BufWritePost ~/.vimrc source $MYVIMRC
@@ -136,3 +126,4 @@ augroup END
 augroup makefile
   autocmd! FileType make setlocal tabstop=4 noexpandtab
 augroup END
+
