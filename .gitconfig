@@ -1,5 +1,8 @@
 [core]
+  editor = nvim
   pager = delta
+[color]
+  ui = auto
 [interactive]
   diffFilter = delta --color-only
 [init]
@@ -12,6 +15,7 @@
 [fetch]
   prune = true
 [merge]
+  autostash = true
   conflictstyle = diff3
 [rebase]
   autostash = true
@@ -19,7 +23,7 @@
 [push]
   default = current
 [pull]
-	ff = only
+  rebase = true
 [diff]
   colorMoved = default
 [delta]
