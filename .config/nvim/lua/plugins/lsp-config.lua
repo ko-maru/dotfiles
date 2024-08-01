@@ -3,8 +3,9 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
-    "nvimdev/lspsaga.nvim",
+    { "nvimdev/lspsaga.nvim" },
     { "folke/neodev.nvim", opts = {} },
+    { "williamboman/mason-lspconfig.nvim", dependencies = "williamboman/mason.nvim" },
   },
   config = function()
     local lspconfig = require("lspconfig")

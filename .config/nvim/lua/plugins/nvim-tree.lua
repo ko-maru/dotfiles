@@ -1,6 +1,20 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
+  cmd = {
+    "NvimTreeToggle",
+    "NvimTreeOpen",
+    "NvimTreeFindFile",
+    "NvimTreeFindFileToggle",
+    "NvimTreeRefresh",
+  },
+  keys = {
+    {
+      "<leader>e",
+      "<cmd>NvimTreeToggle<cr>",
+      desc = "Toggle file explorer",
+    },
+  },
   config = function()
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
@@ -31,12 +45,5 @@ return {
         enable = true,
       },
     })
-
-    vim.keymap.set(
-      "n",
-      "<leader>e",
-      ":NvimTreeToggle<cr>",
-      { silent = true, noremap = true, desc = "Toggle file explorer" }
-    )
   end,
 }

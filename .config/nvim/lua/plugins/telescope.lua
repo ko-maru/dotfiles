@@ -6,8 +6,12 @@ return {
     "nvim-tree/nvim-web-devicons",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
+  cmd = { "Telescope" },
   config = function()
     require("telescope").setup({
+      defaults = {
+        file_ignore_patterns = { ".git/" },
+      },
       pickers = {
         find_files = {
           hidden = true,
