@@ -5,12 +5,28 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "folke/trouble.nvim",
   },
   cmd = { "Telescope" },
+  keys = {
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Fuzzy find files in cwd" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find string in cwd" },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Lists open buffers" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Lists available help tags" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Lists previously open files" },
+    { "<leader>gc", "<cmd>Telescope git_bcommits<cr>", desc = "List buffer's git commits" },
+    { "<leader>gC", "<cmd>Telescope git_commits<cr>", desc = "List git commits" },
+  },
   config = function()
+    local open_with_trouble = require("trouble.sources.telescope").open
+
     require("telescope").setup({
       defaults = {
         file_ignore_patterns = { ".git/" },
+        mappings = {
+          n = { ["<c-t>"] = open_with_trouble },
+          i = { ["<c-t>"] = open_with_trouble },
+        },
       },
       pickers = {
         find_files = {
@@ -28,14 +44,5 @@ return {
     })
 
     require("telescope").load_extension("fzf")
-
-    local builtin = require("telescope.builtin")
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" })
-    vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find string in cwd" })
-    vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Lists open buffers" })
-    vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Lists available help tags" })
-    vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Lists previously open files" })
-    vim.keymap.set("n", "<leader>gc", builtin.git_bcommits, { desc = "List buffer's git commits" })
-    vim.keymap.set("n", "<leader>gC", builtin.git_commits, { desc = "List git commits" })
   end,
 }
