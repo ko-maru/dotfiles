@@ -9,6 +9,9 @@ return {
       ts_config = {
         lua = { "string" },
         javascript = { "templete_string" },
+        javascriptreact = { "templete_string" },
+        typescript = { "template_string" },
+        typescriptreact = { "template_string" },
       },
     })
 
